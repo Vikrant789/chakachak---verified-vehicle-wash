@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "lead": {
+      "title": "Lead",
+      "description": "Pre-registration lead submission for vehicle care service",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "email": { "type": "string" },
+        "city": { "type": "string" },
+        "societyName": { "type": "string" },
+        "vehicleType": { "type": "string" },
+        "interestedPlan": { "type": "string" },
+        "societySize": { "type": "string" },
+        "discountAmount": { "type": "number" },
+        "finalPrice": { "type": "number" },
+        "referralCode": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "queueNumber": { "type": "number" }
+      },
+      "required": ["id", "name", "mobile", "email", "city", "societyName", "vehicleType", "interestedPlan", "societySize", "discountAmount", "finalPrice", "referralCode", "createdAt"]
+    },
+    "sheetsConfig": {
+      "title": "Sheets Config",
+      "description": "Configuration and active OAuth token for Google Sheets sync",
+      "type": "object",
+      "properties": {
+        "spreadsheetId": { "type": "string" },
+        "accessToken": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "lead",
+      "description": "List of all registration leads"
+    },
+    "/config/sheets": {
+      "schema": "sheetsConfig",
+      "description": "Active spreadsheet mapping configuration"
+    }
+  }
+}

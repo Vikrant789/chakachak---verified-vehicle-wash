@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud_firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Config Collection for Sheets Configuration
+    match /config/sheets {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Leads Collection
+    match /leads/{leadId} {
+      // Allow any visitor to register a lead
+      allow create: if request.resource.data.keys().hasAll(['id', 'name', 'mobile', 'email', 'city', 'societyName', 'vehicleType', 'interestedPlan', 'societySize', 'discountAmount', 'finalPrice', 'referralCode', 'createdAt'])
+                      && request.resource.data.name is string && request.resource.data.name.size() <= 100
+                      && request.resource.data.mobile is string && request.resource.data.mobile.size() == 10
+                      && request.resource.data.email is string && request.resource.data.email.size() <= 100
+                      && request.resource.data.societyName is string && request.resource.data.societyName.size() <= 100;
+      
+      // Allow admin/developer to view, edit, or delete leads
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}
