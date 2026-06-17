@@ -967,7 +967,7 @@ export default function App() {
                 {/* Share action triggers */}
                 <div className="space-y-3 pt-2">
                   <a
-                    href={`https://api.whatsapp.com/send?text=I just secured India's First Doorstep Verified Vehicle Washing Service discount pass with ChakaChak! Join Pune pre-launch to get 50% off flat: https://chakachak-verified-vehicle-wash.vercel.app/ referral: ${formSuccessPass.referralCode}`}
+                    href={`https://api.whatsapp.com/send?text=I just secured India's First Doorstep Verified Vehicle Washing Service discount pass with ChakaChak! Join Pune pre-launch to get 50% off flat: https://chakachak.net/ referral: ${formSuccessPass.referralCode}`}
                     className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-xl uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                     target="_blank"
                     rel="noopener noreferrer"
