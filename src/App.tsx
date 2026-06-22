@@ -125,7 +125,7 @@ const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: '1299',
     name: 'Premium car care plan',
-    price: 649,
+    price: 1299,
     originalPrice: 1299,
     intendedFor: 'Advanced detailing standard',
     features: [
@@ -195,7 +195,7 @@ export default function App() {
       if (saved) {
         try {
           setLeads(JSON.parse(saved));
-        } catch (_) {}
+        } catch (_) { }
       }
     }
   };
@@ -283,7 +283,7 @@ export default function App() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
       errors.email = 'Please enter a valid email address';
     }
-    
+
     const targetSociety = selectedSocietyOption === 'Other' ? customSocietyName.trim() : selectedSocietyOption;
     if (!targetSociety) errors.societyName = 'Please enter your society name';
     return errors;
@@ -409,11 +409,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col justify-between selection:bg-orange-500 selection:text-white">
-      
+
       {/* HEADER NAVIGATION */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 py-2.5 md:py-3.5 px-3 md:px-8 shadow-sm">
         <div className="max-w-7xl mx-auto flex flex-row justify-between items-center w-full gap-2">
-          
+
           {/* Logo on Left */}
           <div className="flex items-center shrink-0">
             <ChakaChakLogo size="sm" showTagline={false} />
@@ -423,12 +423,12 @@ export default function App() {
           <div className="flex justify-center items-center flex-1 text-center py-1">
             <div className="relative inline-flex items-center justify-center select-none">
               {/* Left Tail Background */}
-              <div 
+              <div
                 className="absolute right-[98%] top-[4px] h-4 w-4 md:w-6 bg-orange-600 shadow-xs"
                 style={{ clipPath: 'polygon(100% 0, 25% 0, 0 50%, 25% 100%, 100% 100%)' }}
               />
               {/* Left Fold Shading Triangle */}
-              <div 
+              <div
                 className="absolute right-[98%] top-[20px] border-t-[4px] border-t-orange-850 border-l-[4px] border-l-transparent z-0"
               />
 
@@ -438,11 +438,11 @@ export default function App() {
               </div>
 
               {/* Right Fold Shading Triangle */}
-              <div 
+              <div
                 className="absolute left-[98%] top-[20px] border-t-[4px] border-t-orange-850 border-r-[4px] border-r-transparent z-0"
               />
               {/* Right Tail Background */}
-              <div 
+              <div
                 className="absolute left-[98%] top-[4px] h-4 w-4 md:w-6 bg-orange-600 shadow-xs"
                 style={{ clipPath: 'polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%)' }}
               />
@@ -468,12 +468,12 @@ export default function App() {
         {/* HERO BANNER SECTION */}
         <section className="relative bg-gradient-to-b from-blue-50/50 via-white to-slate-50 border-b border-slate-100 py-12 md:py-20 lg:py-24 px-4 md:px-8 overflow-hidden">
           <WaterSplashCanvas />
-          
+
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6 md:space-y-8">
-              
+
               {/* Ticking Time Countdown Banner (Mobile & Tablet) */}
               <div className="block lg:hidden bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-xs">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-3 mb-3 text-xs">
@@ -572,7 +572,7 @@ export default function App() {
 
             {/* Right Launch Card Column */}
             <div className="lg:col-span-5 space-y-6">
-              
+
               {/* Ticking Time Countdown Banner (Desktop Only) */}
               <div className="hidden lg:block bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-xs">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-3 mb-3 text-xs">
@@ -613,7 +613,7 @@ export default function App() {
         {/* SECTION: INTRODUCING CHAKACHAK */}
         <section id="features-section" className="py-16 md:py-24 bg-slate-50 px-4 md:px-8 border-b border-slate-100">
           <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
-            
+
             <div className="text-center max-w-xl mx-auto space-y-2">
               <span className="text-2xs font-bold text-orange-600 tracking-wider uppercase font-mono bg-orange-50 px-2.5 py-1 rounded-full">
                 Introducing ChakaChak
@@ -628,7 +628,7 @@ export default function App() {
 
             {/* Core Value points Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              
+
               <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200/60 shadow-xs space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
                   <Camera className="w-6 h-6" />
@@ -699,7 +699,7 @@ export default function App() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.15),transparent_60%)] pointer-events-none" />
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="bg-white rounded-3xl border border-slate-100 p-8 md:p-10 shadow-2xl text-slate-800 space-y-6 md:space-y-8">
-              
+
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                 <div className="bg-orange-50 border border-orange-100 p-3 rounded-2xl flex items-center gap-3 self-start">
                   <div className="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center shrink-0">
@@ -757,7 +757,7 @@ export default function App() {
         {/* SECTION: SUBSCRIPTION PLANS */}
         <section id="pricing-section" className="py-16 md:py-24 bg-slate-50 px-4 md:px-8 border-b border-slate-100">
           <div className="max-w-7xl mx-auto space-y-12">
-            
+
             <div className="text-center max-w-xl mx-auto space-y-2">
               <span className="text-2xs font-bold text-orange-600 tracking-wider uppercase font-mono bg-orange-50 px-2.5 py-1 rounded-full">
                 Subscription Pricing Plans
@@ -776,11 +776,10 @@ export default function App() {
                 return (
                   <div
                     key={plan.id}
-                    className={`bg-white rounded-3xl border p-6 md:p-8 flex flex-col justify-between transition-all duration-300 relative ${
-                      plan.isPopular
-                        ? 'border-blue-500 shadow-xl lg:scale-103 z-10'
-                        : 'border-slate-200 hover:border-slate-300 shadow-md'
-                    }`}
+                    className={`bg-white rounded-3xl border p-6 md:p-8 flex flex-col justify-between transition-all duration-300 relative ${plan.isPopular
+                      ? 'border-blue-500 shadow-xl lg:scale-103 z-10'
+                      : 'border-slate-200 hover:border-slate-300 shadow-md'
+                      }`}
                   >
                     {/* Popular banner ribbon */}
                     {plan.isPopular && (
@@ -790,7 +789,7 @@ export default function App() {
                     )}
 
                     <div className="space-y-6">
-                      
+
                       {/* Name and targeting */}
                       <div>
                         <span className="text-xs uppercase font-extrabold text-blue-600 tracking-widest font-mono block">{plan.name}</span>
@@ -815,14 +814,37 @@ export default function App() {
                           <span className="text-slate-500 text-[10px] ml-1.5">(Luxury Veh.)</span>
                         </div>
                       ) : (
+                        // <div className="flex items-baseline gap-1.5 border-t border-b border-slate-100 py-4">
+                        //   <span className="text-slate-400 text-xs font-semibold line-through">₹{plan.price * 2}</span>
+                        //   <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">₹{plan.price}</span>
+                        //   <span className="text-slate-500 text-xs">/ mo</span>
+                        //   {plan.originalPrice > plan.price && (
+                        //   <span className="bg-orange-100 text-orange-600 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ml-1 shrink-0">
+                        //     50% Off (Launch)
+                        //   </span>
+                        //   )}
+                        // </div>
+
                         <div className="flex items-baseline gap-1.5 border-t border-b border-slate-100 py-4">
-                          <span className="text-slate-400 text-xs font-semibold line-through">₹{plan.price * 2}</span>
-                          <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">₹{plan.price}</span>
-                          <span className="text-slate-500 text-xs">/ mo</span>
-                          <span className="bg-orange-100 text-orange-600 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ml-1 shrink-0">
-                            50% Off (Launch)
+                          {plan.originalPrice > plan.price && (
+                            <span className="text-slate-400 text-xs font-semibold line-through">
+                              ₹{plan.originalPrice}
+                            </span>
+                          )}
+
+                          <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                            ₹{plan.price}
                           </span>
+
+                          <span className="text-slate-500 text-xs">/ mo</span>
+
+                          {plan.originalPrice > plan.price && (
+                            <span className="bg-orange-100 text-orange-600 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ml-1 shrink-0">
+                              50% Off (Launch)
+                            </span>
+                          )}
                         </div>
+
                       )}
 
                       {/* Small stats tag */}
@@ -834,7 +856,7 @@ export default function App() {
                       {/* Features Bullet details */}
                       <ul className="space-y-3">
                         {plan.features.map((feature, idx) => (
-                           <li key={`plan-${plan.id}-feat-${idx}`} className="flex gap-2 text-xs text-slate-600 leading-normal">
+                          <li key={`plan-${plan.id}-feat-${idx}`} className="flex gap-2 text-xs text-slate-600 leading-normal">
                             <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                             <span>{feature}</span>
                           </li>
@@ -846,11 +868,10 @@ export default function App() {
                     <div className="mt-8 pt-4">
                       <button
                         onClick={() => handleSelectPlan(plan.id)}
-                        className={`w-full py-3.5 px-4 rounded-xl font-extrabold text-xs tracking-wider uppercase transition-all active:scale-98 cursor-pointer ${
-                          plan.isPopular
-                            ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-500/10'
-                            : 'bg-slate-900 text-white hover:bg-slate-800'
-                        }`}
+                        className={`w-full py-3.5 px-4 rounded-xl font-extrabold text-xs tracking-wider uppercase transition-all active:scale-98 cursor-pointer ${plan.isPopular
+                          ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-500/10'
+                          : 'bg-slate-900 text-white hover:bg-slate-800'
+                          }`}
                       >
                         Reserve {plan.name}
                       </button>
@@ -873,13 +894,13 @@ export default function App() {
 
         {/* SECTION: RESERVATION LEAD CAPTURE FORM */}
         <section id="reserve-discount-form" className="py-16 md:py-24 bg-gradient-to-b from-blue-50/20 via-white to-blue-50/50 px-4 md:px-8 relative overflow-hidden">
-          
+
           {/* Accent dynamic droplets */}
           <div className="absolute top-1/4 -left-12 w-48 h-48 bg-blue-100 rounded-full blur-3xl opacity-30 pointer-events-none" />
           <div className="absolute bottom-1/4 -right-12 w-64 h-64 bg-orange-100 rounded-full blur-3xl opacity-30 pointer-events-none" />
 
           <div className="max-w-4xl mx-auto relative z-10">
-            
+
             <div className="text-center max-w-xl mx-auto space-y-3 mb-10">
               <span className="text-2xs font-bold text-orange-600 tracking-wider uppercase font-mono bg-orange-50 px-3 py-1 rounded-full inline-block">
                 Lock Your Special Price
@@ -893,10 +914,10 @@ export default function App() {
             </div>
 
             {formSuccessPass ? (
-              
+
               /* EXQUISITE PRINTABLE GOLD PASS CONFIRMATION WINDOW */
               <div className="bg-white rounded-3xl border-2 border-orange-400 p-6 md:p-8 shadow-2xl space-y-6 md:space-y-8 animate-scaleUp max-w-2xl mx-auto">
-                
+
                 {/* Successful Alert status line */}
                 <div className="text-center space-y-1 bg-emerald-50 border border-emerald-100 py-3.5 px-4 rounded-2xl">
                   <CheckCircle className="w-10 h-10 text-emerald-500 mx-auto" />
@@ -908,7 +929,7 @@ export default function App() {
 
                 {/* The Ticket Pass */}
                 <div className="border border-slate-200 rounded-2xl overflow-hidden shadow-md">
-                  
+
                   {/* Top Ticket Header */}
                   <div className="bg-gradient-to-r from-blue-700 to-blue-600 text-white p-4 flex justify-between items-center select-none font-mono text-2xs uppercase tracking-wider">
                     <span>CHAKACHAK VIP GOLD PASS</span>
@@ -917,7 +938,7 @@ export default function App() {
 
                   {/* Core Pass body details */}
                   <div className="p-5 md:p-6 space-y-6 bg-slate-50 relative">
-                    
+
                     {/* Decorative side ticket notches */}
                     <div className="absolute top-1/2 -left-3.5 -translate-y-1/2 w-7 h-7 rounded-full bg-white border-r border-slate-200" />
                     <div className="absolute top-1/2 -right-3.5 -translate-y-1/2 w-7 h-7 rounded-full bg-white border-l border-slate-200" />
@@ -942,7 +963,7 @@ export default function App() {
                     </div>
 
                     {/* Pricing computations details */}
-                    <div className="bg-white border border-slate-200/60 p-4 rounded-xl flex items-center justify-between">
+                    {/* <div className="bg-white border border-slate-200/60 p-4 rounded-xl flex items-center justify-between">
                       <div>
                         <span className="text-3xs font-bold text-slate-400 uppercase tracking-widest block font-mono">Reserved Subscription Plan</span>
                         <strong className="text-xs md:text-sm text-slate-800">
@@ -953,6 +974,29 @@ export default function App() {
                         <span className="text-3xs font-bold text-emerald-500 uppercase tracking-widest block font-mono">Locked 50% Bill</span>
                         <strong className="text-sm md:text-base font-black text-emerald-600">₹{formSuccessPass.finalPrice}/Month</strong>
                       </div>
+                    </div> */}
+                    <div className="text-right">
+                      {(() => {
+                        const selectedPlan = SUBSCRIPTION_PLANS.find(
+                          p => p.id === formSuccessPass.interestedPlan
+                        );
+
+                        const hasDiscount =
+                          selectedPlan &&
+                          selectedPlan.originalPrice > selectedPlan.price;
+
+                        return (
+                          <>
+                            <span className="text-3xs font-bold text-emerald-500 uppercase tracking-widest block font-mono">
+                              {hasDiscount ? 'Locked 50% Bill' : 'Locked Monthly Plan'}
+                            </span>
+
+                            <strong className="text-sm md:text-base font-black text-emerald-600">
+                              ₹{formSuccessPass.finalPrice}/Month
+                            </strong>
+                          </>
+                        );
+                      })()}
                     </div>
 
                     {/* Barcode Simulator visual asset */}
@@ -997,24 +1041,23 @@ export default function App() {
 
               </div>
             ) : (
-              
+
               /* STANDARD GLASSMORPHISM FORM */
               <form
                 onSubmit={handleSubmit}
                 className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl space-y-6 max-w-2xl mx-auto"
               >
-                
+
                 {/* Form upper rows - Name & Contact */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  
+
                   {/* Name field */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-slate-700 block uppercase tracking-wide">Name</label>
                     <input
                       type="text"
-                      className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all ${
-                        formErrors.name ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
-                      }`}
+                      className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all ${formErrors.name ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
+                        }`}
                       placeholder="e.g. Swaminathan Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
@@ -1041,9 +1084,8 @@ export default function App() {
                     <input
                       type="tel"
                       maxLength={10}
-                      className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all font-mono ${
-                        formErrors.mobile ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
-                      }`}
+                      className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all font-mono ${formErrors.mobile ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
+                        }`}
                       placeholder="10-digit number"
                       value={formData.mobile}
                       onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value.replace(/\D/g, '') }))}
@@ -1058,9 +1100,8 @@ export default function App() {
                     <label className="text-xs font-bold text-slate-700 block uppercase tracking-wide">Email Address</label>
                     <input
                       type="email"
-                      className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all ${
-                        formErrors.email ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
-                      }`}
+                      className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all ${formErrors.email ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
+                        }`}
                       placeholder="e.g. josh@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
@@ -1074,15 +1115,14 @@ export default function App() {
 
                 {/* Society and size */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                  
+
                   {/* Society name dropdown and field */}
                   <div className="md:col-span-8 space-y-3">
                     <div className="space-y-1.5">
                       <label className="text-xs font-bold text-slate-700 block uppercase tracking-wide">Society Name</label>
                       <select
-                        className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all cursor-pointer font-semibold ${
-                          formErrors.societyName ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
-                        }`}
+                        className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all cursor-pointer font-semibold ${formErrors.societyName ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
+                          }`}
                         value={selectedSocietyOption}
                         onChange={(e) => {
                           const val = e.target.value;
@@ -1113,9 +1153,8 @@ export default function App() {
                         </label>
                         <input
                           type="text"
-                          className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all ${
-                            formErrors.societyName ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
-                          }`}
+                          className={`w-full p-3 rounded-xl border bg-slate-50 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all ${formErrors.societyName ? 'border-red-400 ring-2 ring-red-400/10' : 'border-slate-200'
+                            }`}
                           placeholder="Please enter your society name..."
                           value={customSocietyName}
                           onChange={(e) => setCustomSocietyName(e.target.value)}
@@ -1147,7 +1186,7 @@ export default function App() {
 
                 {/* Selectors: Vehicle Type, Interested Plan */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  
+
                   {/* Vehicle Type radio list */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-slate-700 block uppercase tracking-wide">Vehicle Type</label>
@@ -1161,11 +1200,10 @@ export default function App() {
                             const newPlan = isTwoWheeler ? '799' : prev.interestedPlan;
                             return { ...prev, vehicleType: type, interestedPlan: newPlan };
                           })}
-                          className={`py-3.5 px-3 rounded-xl text-center border font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
-                            formData.vehicleType === type
-                              ? 'bg-blue-50 border-blue-600 text-blue-700 ring-1 ring-blue-300'
-                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                          }`}
+                          className={`py-3.5 px-3 rounded-xl text-center border font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${formData.vehicleType === type
+                            ? 'bg-blue-50 border-blue-600 text-blue-700 ring-1 ring-blue-300'
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                            }`}
                         >
                           <span className="text-xl">
                             {type === 'Car' ? '🚗' : type === 'Bike' ? '🏍' : '🛵'}
@@ -1181,9 +1219,8 @@ export default function App() {
                     <label className="text-xs font-bold text-slate-700 block uppercase tracking-wide">
                       {formData.vehicleType === 'Car' ? 'Interested Plan Option' : 'Interested Plan Option (Bike/Scooter Exclusive)'}
                     </label>
-                    <div className={`grid gap-2 ${
-                      formData.vehicleType === 'Car' ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-1'
-                    }`}>
+                    <div className={`grid gap-2 ${formData.vehicleType === 'Car' ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-1'
+                      }`}>
                       {SUBSCRIPTION_PLANS.filter((plan) => {
                         const isTwoWheeler = formData.vehicleType === 'Bike' || formData.vehicleType === 'Scooter';
                         if (isTwoWheeler) {
@@ -1196,11 +1233,10 @@ export default function App() {
                           key={plan.id}
                           type="button"
                           onClick={() => setFormData((prev) => ({ ...prev, interestedPlan: plan.id }))}
-                          className={`py-3 px-1.5 rounded-xl text-center border font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
-                            formData.interestedPlan === plan.id
-                              ? 'bg-orange-50 border-orange-500 text-orange-700 ring-1 ring-orange-300'
-                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                          }`}
+                          className={`py-3 px-1.5 rounded-xl text-center border font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${formData.interestedPlan === plan.id
+                            ? 'bg-orange-50 border-orange-500 text-orange-700 ring-1 ring-orange-300'
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                            }`}
                         >
                           <span className="text-sm font-black">
                             {plan.id === 'exclusive' ? 'Custom' : `₹${plan.price}`}
@@ -1216,7 +1252,7 @@ export default function App() {
                 </div>
 
                 {/* Total computation live preview summary */}
-                <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex items-center justify-between text-xs md:text-sm font-semibold">
+                {/* <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex items-center justify-between text-xs md:text-sm font-semibold">
                   <div>
                     <span className="text-3xs uppercase text-slate-400 font-bold block mb-0.5 tracking-wider font-mono">Selected Plan Bill</span>
                     <span className="text-slate-800">
@@ -1239,6 +1275,62 @@ export default function App() {
                       )}
                     </span>
                   </div>
+                </div> */}
+
+                <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex items-center justify-between text-xs md:text-sm font-semibold">
+                  {(() => {
+                    const selectedPlan = SUBSCRIPTION_PLANS.find(
+                      p => p.id === formData.interestedPlan
+                    );
+
+                    const hasDiscount =
+                      selectedPlan &&
+                      selectedPlan.originalPrice > selectedPlan.price;
+
+                    return (
+                      <>
+                        <div>
+                          <span className="text-3xs uppercase text-slate-400 font-bold block mb-0.5 tracking-wider font-mono">
+                            Selected Plan Bill
+                          </span>
+
+                          <span className="text-slate-800">
+                            {formData.interestedPlan === 'exclusive' ? (
+                              <span>Exclusive Custom Plan</span>
+                            ) : hasDiscount ? (
+                              <span>
+                                Regular Price:
+                                <span className="line-through text-slate-400 ml-1">
+                                  ₹{selectedPlan.originalPrice}
+                                </span>
+                                {" "} / month
+                              </span>
+                            ) : (
+                              <span>
+                                Monthly Subscription: ₹{selectedPlan?.price} / month
+                              </span>
+                            )}
+                          </span>
+                        </div>
+
+                        <div className="text-right">
+                          <span className="text-3xs uppercase text-emerald-600 font-bold block mb-0.5 tracking-wider font-mono">
+                            {formData.interestedPlan === 'exclusive'
+                              ? 'Luxury Wash'
+                              : hasDiscount
+                                ? 'Special Pre-Launch Price (50% Off)'
+                                : 'Premium Plan'}
+                          </span>
+
+                          <span className="text-base md:text-lg font-black text-emerald-600">
+                            {formData.interestedPlan === 'exclusive'
+                              ? 'Custom Quote'
+                              : `₹${selectedPlan?.price} / month`}
+                          </span>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
 
                 {/* Submit button */}
@@ -1262,10 +1354,10 @@ export default function App() {
         {/* SECTION: AUDIT PROBLEMS DIAGNOSTIC (OPTIONAL END SECTION) */}
         <section id="audit-section" className="py-16 md:py-24 bg-white px-4 md:px-8 border-t border-b border-slate-100">
           <div className="max-w-7xl mx-auto space-y-12">
-            
+
             <div className="text-center max-w-xl mx-auto space-y-2">
               <span className="text-2xs font-extrabold text-blue-600 tracking-wider uppercase font-mono bg-blue-50 px-3 py-1 rounded-full">
-                 Optional Diagnostic Assessment
+                Optional Diagnostic Assessment
               </span>
               <h2 className="text-3xl font-black text-slate-900 tracking-tight font-display">
                 Do You Have Paint Swirl-marks?
@@ -1311,7 +1403,7 @@ export default function App() {
               <p className="text-3xs text-slate-500 uppercase tracking-widest font-mono mt-1">Cleanliness. Accountability. Verification. Every single morning.</p>
             </div>
           </div>
-          
+
           <hr className="border-slate-900 my-4" />
 
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-3xs text-slate-600">
