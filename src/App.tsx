@@ -10,16 +10,10 @@ import {
   CheckCircle,
   Clock,
   Sparkles,
-  Zap,
-  Users,
   ArrowRight,
   Award,
-  Building,
   Check,
-  Settings,
-  ChevronRight,
   Droplets,
-  AlertOctagon,
   Camera,
   Share2
 } from 'lucide-react';
@@ -49,8 +43,8 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
     vehicleType: 'Car',
     interestedPlan: '1099',
     societySize: '100-200',
-    discountAmount: 550,
-    finalPrice: 549,
+    discountAmount: 0,
+    finalPrice: 1099,
     referralCode: 'CHAK-PUNE-8924',
     createdAt: '2026-06-10T11:45:00Z',
     queueNumber: 124,
@@ -65,8 +59,8 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
     vehicleType: 'Scooter',
     interestedPlan: '799',
     societySize: '200+',
-    discountAmount: 400,
-    finalPrice: 399,
+    discountAmount: 0,
+    finalPrice: 799,
     referralCode: 'CHAK-PUNE-0715',
     createdAt: '2026-06-10T14:20:00Z',
     queueNumber: 125,
@@ -81,8 +75,8 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
     vehicleType: 'Car',
     interestedPlan: '1299',
     societySize: '50-100',
-    discountAmount: 650,
-    finalPrice: 649,
+    discountAmount: 0,
+    finalPrice: 1299,
     referralCode: 'CHAK-PUNE-1102',
     createdAt: '2026-06-10T16:10:00Z',
     queueNumber: 126,
@@ -93,9 +87,9 @@ const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: '799',
     name: 'Basic care plan',
-    price: 399,
+    price: 799,
     originalPrice: 799,
-    intendedFor: 'Applied 50% discount',
+    intendedFor: 'Basic care plan',
     features: [
       '6 car clean every week',
       'Missed car wash tracking and refund.',
@@ -107,9 +101,9 @@ const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: '1099',
     name: 'Smart care plan',
-    price: 549,
+    price: 1099,
     originalPrice: 1099,
-    intendedFor: 'Applied 50% discount',
+    intendedFor: 'Smart care plan',
     features: [
       '6 car clean every week',
       'One foam wash every week',
@@ -175,7 +169,7 @@ export default function App() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-  // Countdown State for Launch: 1 August 2026
+  // Countdown State for Launch: 1 September 2026
   const [countdown, setCountdown] = useState({ days: 51, hours: 6, minutes: 25, seconds: 12 });
 
   // Live Firestore Synchronization
@@ -249,7 +243,7 @@ export default function App() {
 
   // Live Countdown Ticker logic
   useEffect(() => {
-    const targetDate = new Date('2026-08-01T00:00:00Z').getTime();
+    const targetDate = new Date('2026-09-01T00:00:00Z').getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
@@ -301,9 +295,7 @@ export default function App() {
     setIsSubmitting(true);
 
     const selectedPlan = SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan);
-    const originalPrice = selectedPlan ? selectedPlan.originalPrice : 0;
     const finalVal = selectedPlan ? selectedPlan.price : 0;
-    const discount = originalPrice - finalVal;
 
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     const code = `CHAK-PUNE-${randomSuffix}`;
@@ -321,7 +313,7 @@ export default function App() {
       vehicleType: formData.vehicleType,
       interestedPlan: formData.interestedPlan,
       societySize: formData.societySize,
-      discountAmount: discount,
+      discountAmount: 0,
       finalPrice: finalVal,
       referralCode: code,
       createdAt: new Date().toISOString(),
@@ -395,7 +387,7 @@ export default function App() {
       };
     });
     // scroll smooth to selection form
-    const elem = document.getElementById('reserve-discount-form');
+    const elem = document.getElementById('reserve-plan-form');
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
     }
@@ -449,13 +441,13 @@ export default function App() {
             </div>
           </div>
 
-          {/* "Reserve My Discount" on Right */}
+          {/* "Reserve My Plan" on Right */}
           <div className="flex items-center shrink-0">
             <a
-              href="#reserve-discount-form"
+              href="#reserve-plan-form"
               className="bg-blue-600 hover:bg-blue-700 text-white font-black text-xs md:text-sm px-4 py-2.5 md:px-6 md:py-3 rounded-lg md:rounded-xl shadow-md hover:shadow-lg hover:scale-102 transition-all active:scale-95 text-center leading-none whitespace-nowrap"
             >
-              Reserve My Discount
+              Reserve My Plan
             </a>
           </div>
 
@@ -472,14 +464,14 @@ export default function App() {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
 
             {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6 md:space-y-8">
+            <div className="lg:col-span-12 space-y-6 md:space-y-8">
 
               {/* Ticking Time Countdown Banner (Mobile & Tablet) */}
-              <div className="block lg:hidden bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-xs">
+              {/* <div className="block lg:hidden bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-xs">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-3 mb-3 text-xs">
                   <div>
                     <span className="text-orange-600 font-extrabold tracking-wide uppercase flex items-center gap-1 font-sans">
-                      <Award className="w-4 h-4 text-orange-500" /> Launching 1 August 2026
+                      <Award className="w-4 h-4 text-orange-500" /> Launching soon..!
                     </span>
                     <span className="text-slate-400 mt-0.5 block text-xs">Pune rollout pre-registration live</span>
                   </div>
@@ -503,7 +495,7 @@ export default function App() {
                     <span className="text-3xs uppercase font-semibold text-orange-400 tracking-wider">Secs</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold tracking-wide animate-pulse">
                 <Sparkles className="w-3.5 h-3.5 text-orange-500" />
@@ -571,14 +563,14 @@ export default function App() {
             </div>
 
             {/* Right Launch Card Column */}
-            <div className="lg:col-span-5 space-y-6">
+            {/* <div className="lg:col-span-5 space-y-6">
 
-              {/* Ticking Time Countdown Banner (Desktop Only) */}
+              {/* Ticking Time Countdown Banner (Desktop Only) 
               <div className="hidden lg:block bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-xs">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-3 mb-3 text-xs">
                   <div>
                     <span className="text-orange-600 font-extrabold tracking-wide uppercase flex items-center gap-1 font-sans">
-                      <Award className="w-4 h-4 text-orange-500" /> Launching 1 August 2026
+                      <Award className="w-4 h-4 text-orange-500" /> Launching Soon..!
                     </span>
                     <span className="text-slate-400 mt-0.5 block text-xs">Pune rollout pre-registration live</span>
                   </div>
@@ -604,7 +596,7 @@ export default function App() {
                 </div>
               </div>
 
-            </div>
+            </div> */}
 
           </div>
         </section>
@@ -694,58 +686,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* SECTION: PRE-LAUNCH SPECIAL OFFER */}
-        <section className="bg-gradient-to-r from-blue-700 to-blue-950 py-16 px-4 md:px-8 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.15),transparent_60%)] pointer-events-none" />
-          <div className="max-w-4xl mx-auto relative z-10">
-            <div className="bg-white rounded-3xl border border-slate-100 p-8 md:p-10 shadow-2xl text-slate-800 space-y-6 md:space-y-8">
-
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-                <div className="bg-orange-50 border border-orange-100 p-3 rounded-2xl flex items-center gap-3 self-start">
-                  <div className="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center shrink-0">
-                    <Zap className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-2xs font-bold text-orange-600 uppercase tracking-wider block">Pre-launch Special Offer</span>
-                    <strong className="text-sm text-slate-800">50% OFF your entire first month</strong>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight font-display">
-                    Exclusive Reserve Slots Benefit
-                  </h3>
-                  <p className="text-slate-500 text-xs mt-1">Pre-register today to secure early access benefits</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex gap-3 items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-extrabold text-sm text-slate-900">50% FLAT off</h4>
-                    <p className="text-xs text-slate-500 mt-1">Applicable to your entire first month subscription</p>
-                  </div>
-                </div>
-                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex gap-3 items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-extrabold text-sm text-slate-900">Priority onboarding</h4>
-                    <p className="text-xs text-slate-500 mt-1">For your housing society block</p>
-                  </div>
-                </div>
-                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex gap-3 items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-extrabold text-sm text-slate-900">Early access</h4>
-                    <p className="text-xs text-slate-500 mt-1">To Android / iOS status tracker app</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
         {/* SECTION: BEFORE/AFTER SLIDER */}
         <section id="difference-section" className="py-16 md:py-24 bg-white px-4 md:px-8 border-b border-slate-100">
           <div className="max-w-7xl mx-auto">
@@ -766,7 +706,7 @@ export default function App() {
                 Premium Doorstep Washing Made Affordable
               </h2>
               <p className="text-slate-500 text-sm">
-                Reserve your launch slot today to lock down these prices and secure an instant 50% discount on your first month billing cycle!
+                Choose the plan that best fits your vehicle care needs and reserve your launch slot today.
               </p>
             </div>
 
@@ -814,37 +754,12 @@ export default function App() {
                           <span className="text-slate-500 text-[10px] ml-1.5">(Luxury Veh.)</span>
                         </div>
                       ) : (
-                        // <div className="flex items-baseline gap-1.5 border-t border-b border-slate-100 py-4">
-                        //   <span className="text-slate-400 text-xs font-semibold line-through">₹{plan.price * 2}</span>
-                        //   <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">₹{plan.price}</span>
-                        //   <span className="text-slate-500 text-xs">/ mo</span>
-                        //   {plan.originalPrice > plan.price && (
-                        //   <span className="bg-orange-100 text-orange-600 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ml-1 shrink-0">
-                        //     50% Off (Launch)
-                        //   </span>
-                        //   )}
-                        // </div>
-
                         <div className="flex items-baseline gap-1.5 border-t border-b border-slate-100 py-4">
-                          {plan.originalPrice > plan.price && (
-                            <span className="text-slate-400 text-xs font-semibold line-through">
-                              ₹{plan.originalPrice}
-                            </span>
-                          )}
-
                           <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
                             ₹{plan.price}
                           </span>
-
                           <span className="text-slate-500 text-xs">/ mo</span>
-
-                          {plan.originalPrice > plan.price && (
-                            <span className="bg-orange-100 text-orange-600 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ml-1 shrink-0">
-                              50% Off (Launch)
-                            </span>
-                          )}
                         </div>
-
                       )}
 
                       {/* Small stats tag */}
@@ -893,7 +808,7 @@ export default function App() {
         </section>
 
         {/* SECTION: RESERVATION LEAD CAPTURE FORM */}
-        <section id="reserve-discount-form" className="py-16 md:py-24 bg-gradient-to-b from-blue-50/20 via-white to-blue-50/50 px-4 md:px-8 relative overflow-hidden">
+        <section id="reserve-plan-form" className="py-16 md:py-24 bg-gradient-to-b from-blue-50/20 via-white to-blue-50/50 px-4 md:px-8 relative overflow-hidden">
 
           {/* Accent dynamic droplets */}
           <div className="absolute top-1/4 -left-12 w-48 h-48 bg-blue-100 rounded-full blur-3xl opacity-30 pointer-events-none" />
@@ -903,13 +818,13 @@ export default function App() {
 
             <div className="text-center max-w-xl mx-auto space-y-3 mb-10">
               <span className="text-2xs font-bold text-orange-600 tracking-wider uppercase font-mono bg-orange-50 px-3 py-1 rounded-full inline-block">
-                Lock Your Special Price
+                Book Your Car Wash
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight font-display">
-                Reserve Your Launch Offer Now
+                Reserve Your Washing Plan
               </h2>
               <p className="text-slate-500 text-xs md:text-sm">
-                Strictly limited slots available for Pune. Early subscribers receive exclusive priority onboarding cards and 50% flat discount vouchers.
+                Select your preferred plan and register your vehicle for ChakaChak's verified doorstep washing service in Pune.
               </p>
             </div>
 
@@ -923,7 +838,7 @@ export default function App() {
                   <CheckCircle className="w-10 h-10 text-emerald-500 mx-auto" />
                   <h3 className="text-lg font-extrabold text-slate-900 mt-1">Pre-Registration Confirmed!</h3>
                   <p className="text-slate-600 text-2xs md:text-xs">
-                    Your 50% discount passes have been successfully generated and queued inside our launch book.
+                    Your registration has been successfully confirmed and queued in our launch book.
                   </p>
                 </div>
 
@@ -962,41 +877,16 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* Pricing computations details */}
-                    {/* <div className="bg-white border border-slate-200/60 p-4 rounded-xl flex items-center justify-between">
-                      <div>
-                        <span className="text-3xs font-bold text-slate-400 uppercase tracking-widest block font-mono">Reserved Subscription Plan</span>
-                        <strong className="text-xs md:text-sm text-slate-800">
-                          {SUBSCRIPTION_PLANS.find(p => p.id === formSuccessPass.interestedPlan)?.name || 'Custom Plan'}
-                        </strong>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-3xs font-bold text-emerald-500 uppercase tracking-widest block font-mono">Locked 50% Bill</span>
-                        <strong className="text-sm md:text-base font-black text-emerald-600">₹{formSuccessPass.finalPrice}/Month</strong>
-                      </div>
-                    </div> */}
+                    {/* Pricing summary */}
                     <div className="text-right">
-                      {(() => {
-                        const selectedPlan = SUBSCRIPTION_PLANS.find(
-                          p => p.id === formSuccessPass.interestedPlan
-                        );
-
-                        const hasDiscount =
-                          selectedPlan &&
-                          selectedPlan.originalPrice > selectedPlan.price;
-
-                        return (
-                          <>
-                            <span className="text-3xs font-bold text-emerald-500 uppercase tracking-widest block font-mono">
-                              {hasDiscount ? 'Locked 50% Bill' : 'Locked Monthly Plan'}
-                            </span>
-
-                            <strong className="text-sm md:text-base font-black text-emerald-600">
-                              ₹{formSuccessPass.finalPrice}/Month
-                            </strong>
-                          </>
-                        );
-                      })()}
+                      <span className="text-3xs font-bold text-emerald-500 uppercase tracking-widest block font-mono">
+                        Monthly Plan
+                      </span>
+                      <strong className="text-sm md:text-base font-black text-emerald-600">
+                        {formSuccessPass.interestedPlan === 'exclusive'
+                          ? 'Custom Quote'
+                          : `₹${formSuccessPass.finalPrice}/Month`}
+                      </strong>
                     </div>
 
                     {/* Barcode Simulator visual asset */}
@@ -1011,7 +901,7 @@ export default function App() {
                 {/* Share action triggers */}
                 <div className="space-y-3 pt-2">
                   <a
-                    href={`https://api.whatsapp.com/send?text=I just secured India's First Doorstep Verified Vehicle Washing Service discount pass with ChakaChak! Join Pune pre-launch to get 50% off flat: https://chakachak.net/ referral: ${formSuccessPass.referralCode}`}
+                    href={`https://api.whatsapp.com/send?text=I just registered for India's First Doorstep Verified Vehicle Washing Service with ChakaChak! Join the Pune launch: https://chakachak.net/ Referral: ${formSuccessPass.referralCode}`}
                     className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-xl uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1251,86 +1141,30 @@ export default function App() {
 
                 </div>
 
-                {/* Total computation live preview summary */}
-                {/* <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex items-center justify-between text-xs md:text-sm font-semibold">
-                  <div>
-                    <span className="text-3xs uppercase text-slate-400 font-bold block mb-0.5 tracking-wider font-mono">Selected Plan Bill</span>
-                    <span className="text-slate-800">
-                      {formData.interestedPlan === 'exclusive' ? (
-                        <span>Exclusive Custom Plan</span>
-                      ) : (
-                        <span>Regular Price: <span className="line-through text-slate-400">₹{SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan)?.originalPrice}</span> / month</span>
-                      )}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-3xs uppercase text-emerald-600 font-bold block mb-0.5 tracking-wider font-mono">
-                      {formData.interestedPlan === 'exclusive' ? 'Luxury Wash' : 'Special Pre-Launch Price (50% Off)'}
-                    </span>
-                    <span className="text-base md:text-lg font-black text-emerald-600">
-                      {formData.interestedPlan === 'exclusive' ? (
-                        'Custom Quote'
-                      ) : (
-                        `₹${SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan)?.price} / month`
-                      )}
-                    </span>
-                  </div>
-                </div> */}
+                {/* Total subscription summary */}
 
                 <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex items-center justify-between text-xs md:text-sm font-semibold">
-                  {(() => {
-                    const selectedPlan = SUBSCRIPTION_PLANS.find(
-                      p => p.id === formData.interestedPlan
-                    );
+                  <div>
+                    <span className="text-3xs uppercase text-slate-400 font-bold block mb-0.5 tracking-wider font-mono">
+                      Selected Plan
+                    </span>
+                    <span className="text-slate-800">
+                      {formData.interestedPlan === 'exclusive'
+                        ? 'Exclusive Custom Plan'
+                        : SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan)?.name}
+                    </span>
+                  </div>
 
-                    const hasDiscount =
-                      selectedPlan &&
-                      selectedPlan.originalPrice > selectedPlan.price;
-
-                    return (
-                      <>
-                        <div>
-                          <span className="text-3xs uppercase text-slate-400 font-bold block mb-0.5 tracking-wider font-mono">
-                            Selected Plan Bill
-                          </span>
-
-                          <span className="text-slate-800">
-                            {formData.interestedPlan === 'exclusive' ? (
-                              <span>Exclusive Custom Plan</span>
-                            ) : hasDiscount ? (
-                              <span>
-                                Regular Price:
-                                <span className="line-through text-slate-400 ml-1">
-                                  ₹{selectedPlan.originalPrice}
-                                </span>
-                                {" "} / month
-                              </span>
-                            ) : (
-                              <span>
-                                Monthly Subscription: ₹{selectedPlan?.price} / month
-                              </span>
-                            )}
-                          </span>
-                        </div>
-
-                        <div className="text-right">
-                          <span className="text-3xs uppercase text-emerald-600 font-bold block mb-0.5 tracking-wider font-mono">
-                            {formData.interestedPlan === 'exclusive'
-                              ? 'Luxury Wash'
-                              : hasDiscount
-                                ? 'Special Pre-Launch Price (50% Off)'
-                                : 'Premium Plan'}
-                          </span>
-
-                          <span className="text-base md:text-lg font-black text-emerald-600">
-                            {formData.interestedPlan === 'exclusive'
-                              ? 'Custom Quote'
-                              : `₹${selectedPlan?.price} / month`}
-                          </span>
-                        </div>
-                      </>
-                    );
-                  })()}
+                  <div className="text-right">
+                    <span className="text-3xs uppercase text-emerald-600 font-bold block mb-0.5 tracking-wider font-mono">
+                      Monthly Price
+                    </span>
+                    <span className="text-base md:text-lg font-black text-emerald-600">
+                      {formData.interestedPlan === 'exclusive'
+                        ? 'Custom Quote'
+                        : `₹${SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan)?.price} / month`}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Submit button */}
@@ -1340,7 +1174,7 @@ export default function App() {
                     disabled={isSubmitting}
                     className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-xs md:text-sm py-4 rounded-xl uppercase tracking-wider transition-all shadow-md active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <span>{isSubmitting ? 'SECURED REGISTRATION...' : 'Reserve My 50% Launch Discount'}</span>
+                    <span>{isSubmitting ? 'SECURING REGISTRATION...' : 'Reserve My Washing Plan'}</span>
                     <ArrowRight className="w-4 h-4 text-white" />
                   </button>
                 </div>
@@ -1407,7 +1241,7 @@ export default function App() {
           <hr className="border-slate-900 my-4" />
 
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-3xs text-slate-600">
-            <p>© 2026 ChakaChak India. All rights reserved. Launching on 1 August 2026 inside Pune townships.</p>
+            <p>© 2026 ChakaChak India. All rights reserved. Launching soon inside Pune townships.</p>
           </div>
         </div>
       </footer>
