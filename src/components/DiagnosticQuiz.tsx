@@ -148,13 +148,13 @@ export default function DiagnosticQuiz({ onSelectFormPlan }: { onSelectFormPlan:
           </p>
         </div>
 
-        <button
+        {/* <button
           onClick={onSelectFormPlan}
           className="self-start md:self-center bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs md:text-sm px-5 py-3 rounded-xl transition-all shadow-md active:scale-95 shrink-0 flex items-center gap-1.5"
         >
           <Smartphone className="w-4 h-4 text-orange-400 animate-pulse" />
           <span>Lock Pre-Launch Safety Discount</span>
-        </button>
+        </button> */}
       </div>
     </div>
   );

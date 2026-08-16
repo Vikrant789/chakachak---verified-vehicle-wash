@@ -94,10 +94,10 @@ export default function AppMockup() {
             </div>
           </div>
 
-          <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-800 text-xs text-sky-300 flex items-center gap-2">
+          {/* <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-800 text-xs text-sky-300 flex items-center gap-2">
             <Award className="w-4 h-4 text-orange-400 shrink-0" />
-            <span>Launch Day: <strong>1 August 2026</strong>. Free early access included for all pre-launch subscribers.</span>
-          </div>
+            <span>Launch Day: <strong>1 September 2026</strong>. Free early access included for all pre-launch subscribers.</span>
+          </div> */}
         </div>
 
         {/* Right Side: High-fidelity interactive Smartphone Frame */}
