@@ -283,9 +283,105 @@ export default function App() {
     return errors;
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   const errors = validateForm();
+  //   if (Object.keys(errors).length > 0) {
+  //     setFormErrors(errors);
+  //     return;
+  //   }
+
+  //   setFormErrors({});
+  //   setIsSubmitting(true);
+
+  //   const selectedPlan = SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan);
+  //   const finalVal = selectedPlan ? selectedPlan.price : 0;
+
+  //   const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+  //   const code = `CHAK-PUNE-${randomSuffix}`;
+  //   const queueNum = leads.length + 127;
+
+  //   const targetSociety = selectedSocietyOption === 'Other' ? customSocietyName.trim() : selectedSocietyOption;
+
+  //   const newLead: LeadSubmission = {
+  //     id: `lead_${Date.now()}`,
+  //     name: formData.name,
+  //     mobile: formData.mobile,
+  //     email: formData.email,
+  //     city: formData.city,
+  //     societyName: targetSociety,
+  //     vehicleType: formData.vehicleType,
+  //     interestedPlan: formData.interestedPlan,
+  //     societySize: formData.societySize,
+  //     discountAmount: 0,
+  //     finalPrice: finalVal,
+  //     referralCode: code,
+  //     createdAt: new Date().toISOString(),
+  //     queueNumber: queueNum
+  //   };
+
+  //   // Update UI state instantaneously to provide a premium, smooth pre-launch reservation flow
+  //   setLeads((prev) => [newLead, ...prev]);
+  //   localStorage.setItem('chakachak_leads', JSON.stringify([newLead, ...leads]));
+  //   setFormSuccessPass(newLead);
+  //   setIsSubmitting(false);
+
+  //   // Asynchronously synchronize lead information in the background so slow Firestore connection/rules don't block the customer
+  //   Promise.resolve().then(async () => {
+  //     try {
+  //       // 1. Write registration into Firestore leads database
+  //       try {
+  //         await setDoc(doc(db, 'leads', newLead.id), newLead);
+  //       } catch (dbErr) {
+  //         console.warn("Firestore registration save skipped / failed (safe):", dbErr);
+  //       }
+
+  //       // 2. Synchronize to connected Google Sheets immediately if sheets config is active
+  //       const config = await getSheetsConfig();
+  //       if (config) {
+  //         const rowValues = [
+  //           newLead.id,
+  //           newLead.name,
+  //           newLead.mobile,
+  //           newLead.email,
+  //           newLead.city,
+  //           newLead.societyName,
+  //           newLead.societySize,
+  //           newLead.vehicleType,
+  //           newLead.interestedPlan === 'exclusive' ? 'Custom Quote' : `₹${newLead.finalPrice}`,
+  //           newLead.discountAmount,
+  //           newLead.finalPrice,
+  //           newLead.referralCode,
+  //           newLead.createdAt,
+  //           newLead.queueNumber
+  //         ];
+
+  //         if (config.webAppUrl) {
+  //           // Prefer custom Google Apps Script Web App (Robust, direct, no OAuth token expiration)
+  //           await appendRowViaAppsScript(config.webAppUrl, rowValues);
+  //         } else if (config.spreadsheetId && config.accessToken) {
+  //           // Fallback to traditional OAuth append
+  //           await appendRowToSheets(config.spreadsheetId, config.accessToken, rowValues);
+  //         }
+
+  //         // Add to local dynamically supported dropdown if it's external in real-time
+  //         const defaultSocietiesSet = new Set(["Shub Nirwana - Viman Nagar", "VTP - Manjari Khurd", "Zen Elite - Kharadi"]);
+  //         if (!defaultSocietiesSet.has(newLead.societyName)) {
+  //           setDynamicSocieties(prev => Array.from(new Set([...prev, newLead.societyName])));
+  //         }
+  //       }
+  //     } catch (saveError) {
+  //       console.error("Failed to sync pre-registration lead submission in background:", saveError);
+  //     }
+  //   });
+  // };
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const errors = validateForm();
+
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
@@ -294,86 +390,122 @@ export default function App() {
     setFormErrors({});
     setIsSubmitting(true);
 
-    const selectedPlan = SUBSCRIPTION_PLANS.find(p => p.id === formData.interestedPlan);
-    const finalVal = selectedPlan ? selectedPlan.price : 0;
+    try {
+      const selectedPlan = SUBSCRIPTION_PLANS.find(
+        (p) => p.id === formData.interestedPlan
+      );
 
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    const code = `CHAK-PUNE-${randomSuffix}`;
-    const queueNum = leads.length + 127;
+      const finalVal = selectedPlan ? selectedPlan.price : 0;
 
-    const targetSociety = selectedSocietyOption === 'Other' ? customSocietyName.trim() : selectedSocietyOption;
+      // Generate referral code
+      const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+      const referralCode = `CHAK-PUNE-${randomSuffix}`;
 
-    const newLead: LeadSubmission = {
-      id: `lead_${Date.now()}`,
-      name: formData.name,
-      mobile: formData.mobile,
-      email: formData.email,
-      city: formData.city,
-      societyName: targetSociety,
-      vehicleType: formData.vehicleType,
-      interestedPlan: formData.interestedPlan,
-      societySize: formData.societySize,
-      discountAmount: 0,
-      finalPrice: finalVal,
-      referralCode: code,
-      createdAt: new Date().toISOString(),
-      queueNumber: queueNum
-    };
+      // Temporary frontend queue number.
+      // Ideally this should be generated by backend.
+      const queueNumber = leads.length + 127;
 
-    // Update UI state instantaneously to provide a premium, smooth pre-launch reservation flow
-    setLeads((prev) => [newLead, ...prev]);
-    localStorage.setItem('chakachak_leads', JSON.stringify([newLead, ...leads]));
-    setFormSuccessPass(newLead);
-    setIsSubmitting(false);
+      const targetSociety =
+        selectedSocietyOption === 'Other'
+          ? customSocietyName.trim()
+          : selectedSocietyOption;
 
-    // Asynchronously synchronize lead information in the background so slow Firestore connection/rules don't block the customer
-    Promise.resolve().then(async () => {
-      try {
-        // 1. Write registration into Firestore leads database
+      // Convert plan ID into plan name for API
+      const interestedPlan =
+        formData.interestedPlan === 'exclusive'
+          ? 'Exclusive Custom Plan'
+          : selectedPlan?.name || formData.interestedPlan;
+
+      // API payload
+      const payload = {
+        name: formData.name.trim(),
+        mobile: formData.mobile,
+        email: formData.email.trim(),
+        city: formData.city,
+        societyName: targetSociety,
+        societySize: formData.societySize,
+        vehicleType: formData.vehicleType,
+        interestedPlan,
+        discountAmount: 0,
+        finalPrice: finalVal,
+        queueNumber,
+        referralCode,
+      };
+
+      console.log('Submitting lead:', payload);
+
+      const response = await fetch(
+        'https://api-production-c2db4.up.railway.app/leads',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        let errorMessage = 'Failed to reserve your washing plan';
+
         try {
-          await setDoc(doc(db, 'leads', newLead.id), newLead);
-        } catch (dbErr) {
-          console.warn("Firestore registration save skipped / failed (safe):", dbErr);
+          const errorData = await response.json();
+
+          if (errorData?.message) {
+            errorMessage = errorData.message;
+          }
+        } catch {
+          // Ignore JSON parsing error
         }
 
-        // 2. Synchronize to connected Google Sheets immediately if sheets config is active
-        const config = await getSheetsConfig();
-        if (config) {
-          const rowValues = [
-            newLead.id,
-            newLead.name,
-            newLead.mobile,
-            newLead.email,
-            newLead.city,
-            newLead.societyName,
-            newLead.societySize,
-            newLead.vehicleType,
-            newLead.interestedPlan === 'exclusive' ? 'Custom Quote' : `₹${newLead.finalPrice}`,
-            newLead.discountAmount,
-            newLead.finalPrice,
-            newLead.referralCode,
-            newLead.createdAt,
-            newLead.queueNumber
-          ];
-
-          if (config.webAppUrl) {
-            // Prefer custom Google Apps Script Web App (Robust, direct, no OAuth token expiration)
-            await appendRowViaAppsScript(config.webAppUrl, rowValues);
-          } else if (config.spreadsheetId && config.accessToken) {
-            // Fallback to traditional OAuth append
-            await appendRowToSheets(config.spreadsheetId, config.accessToken, rowValues);
-          }
-
-          // Add to local dynamically supported dropdown if it's external in real-time
-          const defaultSocietiesSet = new Set(["Shub Nirwana - Viman Nagar", "VTP - Manjari Khurd", "Zen Elite - Kharadi"]);
-          if (!defaultSocietiesSet.has(newLead.societyName)) {
-            setDynamicSocieties(prev => Array.from(new Set([...prev, newLead.societyName])));
-          }
-        }
-      } catch (saveError) {
-        console.error("Failed to sync pre-registration lead submission in background:", saveError);
+        throw new Error(errorMessage);
       }
-    });
+
+      const apiLead = await response.json();
+
+      console.log('Lead created successfully:', apiLead);
+
+      // Use backend response as the source of truth
+      const newLead: LeadSubmission = {
+        id: apiLead.id,
+        name: apiLead.name,
+        mobile: apiLead.mobile,
+        email: apiLead.email,
+        city: apiLead.city,
+        societyName: apiLead.societyName,
+        vehicleType: apiLead.vehicleType,
+        interestedPlan: formData.interestedPlan,
+        societySize: apiLead.societySize,
+        discountAmount: apiLead.discountAmount,
+        finalPrice: apiLead.finalPrice,
+        referralCode: apiLead.referralCode,
+        createdAt: apiLead.createdAt,
+        queueNumber: apiLead.queueNumber,
+      };
+
+      // Update UI only after successful API response
+      setLeads((prev) => [newLead, ...prev]);
+
+      localStorage.setItem(
+        'chakachak_leads',
+        JSON.stringify([newLead, ...leads])
+      );
+
+      setFormSuccessPass(newLead);
+    } catch (error) {
+      console.error('Lead submission failed:', error);
+
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong while reserving your plan. Please try again.';
+
+      setFormErrors({
+        submit: message,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSelectPlan = (planId: string) => {
@@ -1166,6 +1298,12 @@ export default function App() {
                     </span>
                   </div>
                 </div>
+
+                {formErrors.submit && (
+                  <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-sm font-semibold">
+                    {formErrors.submit}
+                  </div>
+                )}
 
                 {/* Submit button */}
                 <div className="pt-2">
