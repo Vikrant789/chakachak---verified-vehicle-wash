@@ -41,7 +41,7 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
     city: 'Pune',
     societyName: 'Blue Ridge Town Hinjawadi',
     vehicleType: 'Car',
-    interestedPlan: '1099',
+    interestedPlan: 'Smart care plan 1099',
     societySize: '100-200',
     discountAmount: 0,
     finalPrice: 1099,
@@ -57,7 +57,7 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
     city: 'Pune',
     societyName: 'Pristine Privilege Wakad',
     vehicleType: 'Scooter',
-    interestedPlan: '799',
+    interestedPlan: 'Basic care plan 799',
     societySize: '200+',
     discountAmount: 0,
     finalPrice: 799,
@@ -73,7 +73,7 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
     city: 'Pune',
     societyName: 'Gera Trinity Kharadi',
     vehicleType: 'Car',
-    interestedPlan: '1299',
+    interestedPlan: 'Premium car care plan 1299',
     societySize: '50-100',
     discountAmount: 0,
     finalPrice: 1299,
@@ -86,10 +86,10 @@ const INITIAL_MOCK_LEADS: LeadSubmission[] = [
 const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: '799',
-    name: 'Basic care plan',
+    name: 'Basic care plan 799',
     price: 799,
     originalPrice: 799,
-    intendedFor: 'Basic care plan',
+    intendedFor: 'Basic care plan 799',
     features: [
       '6 car clean every week',
       'Missed car wash tracking and refund.',
@@ -100,10 +100,10 @@ const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   },
   {
     id: '1099',
-    name: 'Smart care plan',
+    name: 'Smart care plan 1099',
     price: 1099,
     originalPrice: 1099,
-    intendedFor: 'Smart care plan',
+    intendedFor: 'Smart care plan 1099',
     features: [
       '6 car clean every week',
       'One foam wash every week',
@@ -118,7 +118,7 @@ const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   },
   {
     id: '1299',
-    name: 'Premium car care plan',
+    name: 'Premium car care plan 1299',
     price: 1299,
     originalPrice: 1299,
     intendedFor: 'Advanced detailing standard',
@@ -154,7 +154,7 @@ export default function App() {
     city: 'Pune' as 'Pune',
     societyName: '',
     vehicleType: 'Car' as 'Car' | 'Bike' | 'Scooter',
-    interestedPlan: '1099' as string,
+    interestedPlan: 'Smart care plan 1099' as string,
     societySize: '50-100' as '10-50' | '50-100' | '100-200' | '200+',
   });
 
